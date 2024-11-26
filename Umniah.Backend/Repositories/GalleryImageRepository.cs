@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.Data.Context;
 using Umniah.Backend.Interfaces;
@@ -8,28 +9,32 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
 {
     private readonly UmniahDbContext _dbContext = dbContext;
 
-    public Task Create(GalleryImage input)
+    public async Task Create(GalleryImage input)
     {
-        throw new NotImplementedException();
+        await _dbContext.AddAsync(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Edit(Guid id, GalleryImage input)
+    public async Task Edit(Guid id, GalleryImage input)
     {
-        throw new NotImplementedException();
+         _dbContext.Update(input);
+      await _dbContext.SaveChangesAsync();
     }
 
-    public Task Delete(Guid id)
+    public async Task Delete(Guid id)
     {
-        throw new NotImplementedException();
+        _dbContext.Remove(id);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task<GalleryImage> GetById(Guid id)
+    public async Task<GalleryImage> GetById(Guid id)
     {
-        throw new NotImplementedException();
+       return (await _dbContext.FindAsync<GalleryImage>(id))!;
     }
 
-    public Task<List<GalleryImage>> GetAll()
+    public async Task<List<GalleryImage>> GetAll()
     {
-        throw new NotImplementedException();
+        return  await _dbContext.GalleryImages.ToListAsync();
+     
     }
 }
