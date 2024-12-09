@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.Data.Context;
 using Umniah.Backend.Interfaces;
@@ -9,28 +10,29 @@ public class ProductRepository(UmniahDbContext dbContext) : ICrudRepository<Prod
     private readonly UmniahDbContext _dbContext = dbContext;
 
 
-    public Task Create(Product input)
+    public async Task Create(Product input)
     {
-        throw new NotImplementedException();
+        await _dbContext.AddAsync(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Edit(Guid id, Product input)
+    public async Task Edit(Guid id, Product input)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(input);
+        await _dbContext.SaveChangesAsync();    }
+
+    public async Task Delete(Guid id)
+    {
+        _dbContext.Remove(id);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Delete(Guid id)
+    public async Task<Product> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return (await _dbContext.FindAsync<Product>(id))!;
     }
 
-    public Task<Product> GetById(Guid id)
+    public async Task<List<Product>> GetAll()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Product>> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+        return  await _dbContext.Products.ToListAsync();    }
 }

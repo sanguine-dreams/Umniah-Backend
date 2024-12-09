@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.Data.Context;
 using Umniah.Backend.Interfaces;
@@ -8,28 +9,31 @@ public class PurchaseRepository(UmniahDbContext dbContext) : ICrudRepository<Pur
 {
     private readonly UmniahDbContext _dbContext = dbContext;
 
-    public Task Create(Purchase input)
+    public async Task Create(Purchase input)
     {
-        throw new NotImplementedException();
+        await _dbContext.AddAsync(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Edit(Guid id, Purchase input)
+    public async Task Edit(Guid id, Purchase input)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Delete(Guid id)
+    public async Task Delete(Guid id)
     {
-        throw new NotImplementedException();
+        _dbContext.Remove(id);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task<Purchase> GetById(Guid id)
+    public async Task<Purchase> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return (await _dbContext.FindAsync<Purchase>(id))!;
     }
 
-    public Task<List<Purchase>> GetAll()
+    public async Task<List<Purchase>> GetAll()
     {
-        throw new NotImplementedException();
+        return  await _dbContext.Purchases.ToListAsync();
     }
 }

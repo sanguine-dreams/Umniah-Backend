@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.Data.Context;
 using Umniah.Backend.Interfaces;
@@ -8,28 +9,31 @@ public class OrderRepository(UmniahDbContext dbContext) : ICrudRepository<Order,
 {
     private readonly UmniahDbContext _dbContext = dbContext;
 
-    public Task Create(Order input)
+    public async Task Create(Order input)
     {
-        throw new NotImplementedException();
+        await _dbContext.AddAsync(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Edit(Guid id, Order input)
+    public async Task Edit(Guid id, Order input)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(input);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task Delete(Guid id)
+    public async Task Delete(Guid id)
     {
-        throw new NotImplementedException();
+        _dbContext.Remove(id);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task<Order> GetById(Guid id)
+    public async Task<Order> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return (await _dbContext.FindAsync<Order>(id))!;
     }
 
-    public Task<List<Order>> GetAll()
+    public async Task<List<Order>> GetAll()
     {
-        throw new NotImplementedException();
+        return  await _dbContext.Orders.ToListAsync();
     }
 }
