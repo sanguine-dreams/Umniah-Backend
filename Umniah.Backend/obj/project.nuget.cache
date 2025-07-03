@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "RG5SWXbU8jU=",
+  "dgSpecHash": "66ZXzkwMGSM=",
   "success": true,
   "projectFilePath": "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\Umniah.Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sara0\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\sara0\\.nuget\\packages\\mapster\\7.4.2-pre02\\mapster.7.4.2-pre02.nupkg.sha512",
+    "C:\\Users\\sara0\\.nuget\\packages\\mapster.core\\1.2.3-pre02\\mapster.core.1.2.3-pre02.nupkg.sha512",
     "C:\\Users\\sara0\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.11\\microsoft.aspnetcore.cryptography.internal.8.0.11.nupkg.sha512",
     "C:\\Users\\sara0\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.11\\microsoft.aspnetcore.cryptography.keyderivation.8.0.11.nupkg.sha512",
     "C:\\Users\\sara0\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\8.0.11\\microsoft.aspnetcore.identity.entityframeworkcore.8.0.11.nupkg.sha512",

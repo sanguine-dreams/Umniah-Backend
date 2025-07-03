@@ -1,9 +1,8 @@
-using System.Net.Mime;
 using Umniah.Backend.Data.Enums;
 
-namespace Umniah.Backend.Data;
+namespace Umniah.Backend.DTOs.Output;
 
-public class GalleryImage : BaseModel
+public class OutputGalleryImage
 {
     public string ImageFile { get; set; }
     public string Caption { get; set; } 
