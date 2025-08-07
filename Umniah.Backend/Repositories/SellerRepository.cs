@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.Data.Context;
+using Umniah.Backend.DTOs;
 using Umniah.Backend.Interfaces;
 
 namespace Umniah.Backend.Repositories;
@@ -40,7 +41,7 @@ public class SellerRepository(UmniahDbContext dbContext) : IBulkCrudRepository<S
     
     }
 
-    public async Task<List<Seller>> GetAll()
+    public async Task<ServiceResponse<List<Seller>>> GetAll()
     {
         return  await _dbContext.Sellers.ToListAsync();
     }

@@ -14,19 +14,7 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
     
     public async Task<ServiceResponse<bool>> Create(InputGalleryImage input)
     {
-        if (input is null)
-            return new ServiceResponse<bool>(false, "Input is null");
-    
-        // Validate image file
-        if (string.IsNullOrWhiteSpace(input.imageFile))
-            return new ServiceResponse<bool>(false, "Image file is required");
-    
-        // Validate caption length (max 100 chars)
-        if (string.IsNullOrWhiteSpace(input.Caption))
-            return new ServiceResponse<bool>(false, "Caption is required");
-    
-        if (input.Caption.Length > 100)
-            return new ServiceResponse<bool>(false, "Caption cannot exceed 100 characters");
+        
     
         // Validate tags
         if (input.Tags == null || !input.Tags.Any())
@@ -68,12 +56,12 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<OutputGalleryImage> GetById(Guid id)
+    public async Task<ServiceResponse<OutputGalleryImage>> GetById(Guid id)
     {
        return (await _dbContext.FindAsync<GalleryImage>(id))!;
     }
 
-    public async Task<List<OutputGalleryImage>> GetAll()
+    public async Task<ServiceResponse<List<OutputGalleryImage>>> GetAll()
     {
         return  await _dbContext.GalleryImages.ToListAsync();
      
