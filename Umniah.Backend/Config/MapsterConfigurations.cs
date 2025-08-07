@@ -14,8 +14,8 @@ public class MapsterConfigurations
         // Complex mapping example
         TypeAdapterConfig<InputGalleryImage, GalleryImage>
             .NewConfig()
-            .Map(dest => dest.StoragePath, 
+            .Map(dest => dest.ImageFile, 
                 src => $"/uploads/{Guid.NewGuid()}{Path.GetExtension(src.imageFile)}")
-            .AfterMapping((src, dest) => dest.CreatedAt = DateTime.UtcNow);
+            .AfterMapping((src, dest) => dest.CreatedOn = DateTime.UtcNow);
     }
 }
