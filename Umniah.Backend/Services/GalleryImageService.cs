@@ -1,5 +1,4 @@
 using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
 using Umniah.Backend.DTOs;
 using Umniah.Backend.DTOs.Input;
@@ -40,26 +39,61 @@ public class GalleryImageService (ICrudRepository<GalleryImage> _galleryReposito
             return new ServiceResponse<bool>(false, $"Error saving image: {ex.Message}");
         }
     }
-    public async Task Edit(Guid id, InputGalleryImage input)
+    public async Task<ServiceResponse<bool>> Edit(Guid id, InputGalleryImage input)
     {
-        
+        var existingImage = await _galleryRepository.GetByIdAsync(id);
+        if (existingImage == null)
+            return new ServiceResponse<bool>(false, "Gallery image not found");
+    
+        // Update properties
+        existingImage.Caption = input.Caption;
+        existingImage.Tags = input.Tags;
+    
+        try
+        {
+            await _galleryRepository.UpdateAsync(existingImage);
+            var output = _mapper.Map<OutputGalleryImage>(existingImage);
+            return new ServiceResponse<bool>(true, "Image successfully updated");
+        }
+        catch (Exception ex)
+        {
+            return new ServiceResponse<bool>(false, $"Error updating image: {ex.Message}");
+        }
     }
 
-    public async Task Delete(Guid id)
+    public async Task<ServiceResponse<OutputGalleryImage>> Delete(Guid id)
     {
-      
+      var existingImage = await _galleryRepository.GetByIdAsync(id);
+        if (existingImage == null)
+            return new ServiceResponse<OutputGalleryImage>(false, "Gallery image not found");
+    
+        try
+        {
+            await _galleryRepository.DeleteAsync(id);
+            var output = _mapper.Map<OutputGalleryImage>(existingImage);
+            return new ServiceResponse<OutputGalleryImage>(true, "Image successfully deleted", output);
+        }
+        catch (Exception ex)
+        {
+            return new ServiceResponse<OutputGalleryImage>(false, $"Error deleting image: {ex.Message}");
+        }
     }
 
     public async Task<ServiceResponse<OutputGalleryImage>> GetById(Guid id)
     {
-       return (await _dbContext.FindAsync<GalleryImage>(id))!;
+        var existingImage = await _galleryRepository.GetByIdAsync(id);
+        if (existingImage == null)
+            return new ServiceResponse<OutputGalleryImage>(false, "Gallery image not found");
+    
+        var output = _mapper.Map<OutputGalleryImage>(existingImage);
+        return new ServiceResponse<OutputGalleryImage>(true, "Image retrieved successfully", output);
     }
 
     public async Task<ServiceResponse<List<OutputGalleryImage>>> GetAll()
     {
-        return  await _dbContext.GalleryImages.ToListAsync();
+       var images = await _galleryRepository.GetAllAsync();
+        var output = _mapper.Map<List<OutputGalleryImage>>(images);
+        return new ServiceResponse<List<OutputGalleryImage>>(true, "Images retrieved successfully", output);
      
     }
-
-  
 }
