@@ -1,13 +1,13 @@
 using Umniah.Backend.Data;
-using Umniah.Backend.DTOs;
 
 namespace Umniah.Backend.Interfaces;
 
-public interface ICrudRepository<TInput, TOutput>
+
+public interface ICrudRepository<TEntity> where TEntity : BaseModel
 {
-    Task<ServiceResponse<bool>> Create(TInput input );
-    Task<ServiceResponse<TOutput>> Edit(Guid id, TInput input );
-    Task<ServiceResponse<TOutput>> Delete(Guid id );
-    Task<ServiceResponse<TOutput>> GetById(Guid id);
-    Task<ServiceResponse<List<TOutput>>> GetAll();
+    Task<TEntity?> GetByIdAsync(Guid id);
+    Task<List<TEntity>> GetAllAsync();
+    Task<TEntity> CreateAsync(TEntity entity);
+    Task<bool> UpdateAsync(TEntity entity);
+    Task<bool> DeleteAsync(Guid id);
 }

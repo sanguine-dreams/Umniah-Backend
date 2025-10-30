@@ -1,21 +1,18 @@
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data;
-using Umniah.Backend.Data.Context;
 using Umniah.Backend.DTOs;
 using Umniah.Backend.DTOs.Input;
 using Umniah.Backend.DTOs.Output;
 using Umniah.Backend.Interfaces;
 
-namespace Umniah.Backend.Repositories;
+namespace Umniah.Backend.Services;
 
-public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository<InputGalleryImage, OutputGalleryImage>
+public class GalleryImageService (ICrudRepository<GalleryImage> _galleryRepository, IMapper _mapper) : ICrudService<InputGalleryImage, OutputGalleryImage>
 {
-    private readonly UmniahDbContext _dbContext = dbContext;
-    
-    public async Task<ServiceResponse<bool>> Create(InputGalleryImage input)
+ public async Task<ServiceResponse<bool>> Create(InputGalleryImage input)
     {
         
-    
         // Validate tags
         if (input.Tags == null || !input.Tags.Any())
             return new ServiceResponse<bool>(false, "At least one tag is required");
@@ -32,12 +29,10 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
             return new ServiceResponse<bool>(false, "Invalid image format (must be valid base64)");
         }
     
-        // Save to DB if validations passkkkkkkkkkkkkkk
+        var result = _mapper.Map<GalleryImage>(input);
         try
         {
-            var test = "dinner";
-            await _dbContext.AddAsync(input);
-            await _dbContext.SaveChangesAsync();
+            await _galleryRepository.CreateAsync(result);
             return new ServiceResponse<bool>(true, "Image successfully created", true);
         }
         catch (Exception ex)
@@ -47,14 +42,12 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
     }
     public async Task Edit(Guid id, InputGalleryImage input)
     {
-         _dbContext.Update(input);
-      await _dbContext.SaveChangesAsync();
+        
     }
 
     public async Task Delete(Guid id)
     {
-        _dbContext.Remove(id);
-        await _dbContext.SaveChangesAsync();
+      
     }
 
     public async Task<ServiceResponse<OutputGalleryImage>> GetById(Guid id)
@@ -67,4 +60,6 @@ public class GalleryImageRepository(UmniahDbContext dbContext) : ICrudRepository
         return  await _dbContext.GalleryImages.ToListAsync();
      
     }
+
+  
 }
