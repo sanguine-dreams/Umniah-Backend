@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\Umniah.Backend.csproj": {}
+    "C:\\Users\\Sanguine\\Documents\\GitHub\\Umniah-Backend\\Umniah.Backend\\Umniah.Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\Umniah.Backend.csproj": {
+    "C:\\Users\\Sanguine\\Documents\\GitHub\\Umniah-Backend\\Umniah.Backend\\Umniah.Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\Umniah.Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Sanguine\\Documents\\GitHub\\Umniah-Backend\\Umniah.Backend\\Umniah.Backend.csproj",
         "projectName": "Umniah.Backend",
-        "projectPath": "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\Umniah.Backend.csproj",
-        "packagesPath": "C:\\Users\\sara0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sara0\\Documents\\Umniah.Backend\\Umniah.Backend\\obj\\",
+        "projectPath": "C:\\Users\\Sanguine\\Documents\\GitHub\\Umniah-Backend\\Umniah.Backend\\Umniah.Backend.csproj",
+        "packagesPath": "C:\\Users\\Sanguine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sanguine\\Documents\\GitHub\\Umniah-Backend\\Umniah.Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sara0\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Sanguine\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -57,7 +57,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.11, )"
+              "version": "[9.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

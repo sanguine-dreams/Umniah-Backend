@@ -11,23 +11,21 @@ namespace Umniah.Backend.Services;
 
 public  class OrderService(ICrudRepository<Order> _orderRepository, IMapper _mapper) : ICrudService<InputOrder, OutputOrder>
 {
-    public async Task<ServiceResponse<bool>> Create(Order input)
+    public async Task<ServiceResponse<bool>> Create(InputOrder input)
     {
-        await _orderRepository.CreateAsync(input);
+            var order = _mapper.Map<Order>(input);
+        await _orderRepository.CreateAsync(order);
         return new ServiceResponse<bool>(true, "Order successfully created", true);
     }
 
-    public async Task<ServiceResponse<bool>> Edit(Guid id, Order input)
+    public async Task<ServiceResponse<bool>> Edit(Guid id, InputOrder input)
     {
         var existingOrder = await _orderRepository.GetByIdAsync(id);
         if (existingOrder == null)
             return new ServiceResponse<bool>(false, "Order not found");
 
         // Update properties
-        existingOrder.CustomerId = input.CustomerId;
-        existingOrder.OrderDate = input.OrderDate;
-        existingOrder.ProductIds = input.ProductIds;
-
+     
         try
         {
             await _orderRepository.UpdateAsync(existingOrder);
@@ -56,18 +54,19 @@ public  class OrderService(ICrudRepository<Order> _orderRepository, IMapper _map
         }
     }
 
-    public async Task<ServiceResponse<Order>> GetById(Guid id)
+    public async Task<ServiceResponse<OutputOrder>> GetById(Guid id)
     {
         var existingOrder = await _orderRepository.GetByIdAsync(id);
         if (existingOrder == null)
-            return new ServiceResponse<Order>(false, "Order not found");
+            return new ServiceResponse<OutputOrder>(false, "Order not found");
             var output =_mapper.Map<OutputOrder>(existingOrder);
-        return new ServiceResponse<Order>(output, "Order retrieved successfully", true);
+        return new ServiceResponse<OutputOrder>(true, "Order retrieved successfully", output);
     }
 
-    public async Task<ServiceResponse<List<Order>>> GetAll()
+    public async Task<ServiceResponse<List<OutputOrder>>> GetAll()
     {
-        var orders = await _dbContext.Orders.ToListAsync();
-        return new ServiceResponse<List<Order>>(orders, "Orders retrieved successfully", true);
+        var orders = await _orderRepository.GetAllAsync();
+        var output = _mapper.Map<List<OutputOrder>>(orders);
+        return new ServiceResponse<List<OutputOrder>>(true, "Orders retrieved successfully", output);
     }
 }
