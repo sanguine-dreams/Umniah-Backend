@@ -2,6 +2,7 @@ using MapsterMapper;
 using Umniah.Backend.Data;
 using Umniah.Backend.DTOs;
 using Umniah.Backend.DTOs.Input;
+using Umniah.Backend.DTOs.Output;
 using Umniah.Backend.Interfaces;
 
 namespace Umniah.Backend.Services;

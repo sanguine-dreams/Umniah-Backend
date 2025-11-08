@@ -1,4 +1,4 @@
-namespace Umniah.Backend.DTOs.Input;
+namespace Umniah.Backend.DTOs.Output;
 
 public class OutputProduct
 {
