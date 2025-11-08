@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Umniah.Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+839ab7f5777e0895551a18a9b1903897ca9b2aeb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7207cebf79a59cc98d77f361f47babf1a776e8a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Umniah.Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Umniah.Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
