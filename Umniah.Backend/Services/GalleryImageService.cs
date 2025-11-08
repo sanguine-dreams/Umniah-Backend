@@ -61,21 +61,21 @@ public class GalleryImageService (ICrudRepository<GalleryImage> _galleryReposito
         }
     }
 
-    public async Task<ServiceResponse<OutputGalleryImage>> Delete(Guid id)
+    public async Task<ServiceResponse<bool>> Delete(Guid id)
     {
       var existingImage = await _galleryRepository.GetByIdAsync(id);
         if (existingImage == null)
-            return new ServiceResponse<OutputGalleryImage>(false, "Gallery image not found");
+            return new ServiceResponse<bool>(false, "Gallery image not found");
     
         try
         {
             await _galleryRepository.DeleteAsync(id);
             var output = _mapper.Map<OutputGalleryImage>(existingImage);
-            return new ServiceResponse<OutputGalleryImage>(true, "Image successfully deleted", output);
+            return new ServiceResponse<bool>(true, "Image successfully deleted");
         }
         catch (Exception ex)
         {
-            return new ServiceResponse<OutputGalleryImage>(false, $"Error deleting image: {ex.Message}");
+            return new ServiceResponse<bool>(false, $"Error deleting image: {ex.Message}");
         }
     }
 
