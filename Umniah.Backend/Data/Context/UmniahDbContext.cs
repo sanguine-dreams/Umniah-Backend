@@ -2,8 +2,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Umniah.Backend.Data.Context;
 
-public class UmniahDbContext(DbContextOptions<UmniahDbContext> options) : DbContext(options)
+public class UmniahDbContext : DbContext
 {
+    public UmniahDbContext(DbContextOptions<UmniahDbContext> options) : base(options)
+    {
+    }
     public DbSet<Sale> Sales { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Order> Orders { get; set; }

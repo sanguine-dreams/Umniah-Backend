@@ -1,25 +1,26 @@
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Umniah.Backend.Data.Context;
 using Umniah.Backend.DTOs.Input;
 using Umniah.Backend.DTOs.Output;
 using Umniah.Backend.Interfaces;
+using Umniah.Backend.Repositories;
 using Umniah.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Add DbContext - move this before builder.Build()
-builder.Services.AddDbContext<UmniahDbContext>(
-    options => options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnectionString"]),
-    ServiceLifetime.Scoped);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+builder.Services.AddMapster();
 
+builder.Services.AddDbContext<UmniahDbContext>(
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register Services
+builder.Services.AddScoped(typeof(ICrudRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IBulkRepository<>), typeof(Repository<>));
+
 builder.Services.AddScoped<ICrudService<InputGalleryImage, OutputGalleryImage>, GalleryImageService>();
 builder.Services.AddScoped<ICrudService<InputProduct, OutputProduct>, ProductService>();
 builder.Services.AddScoped<ICrudService<InputPurchase, OutputPurchase>, PurchaseService>();
@@ -27,7 +28,6 @@ builder.Services.AddScoped<ICrudService<InputSale, OutputSale>, SaleService>();
 builder.Services.AddScoped<ICrudService<InputOrder, OutputOrder>, OrderService>();
 builder.Services.AddScoped<IBulkCrudService<InputSeller, OutputSeller>, SellerService>();
 
-// Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
