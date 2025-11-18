@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"6ljFjrjSdpMp+oAjMT8YcFKi7kIPyx5ReQEVenVUnBk=","Source":"Umniah.Backend","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "8FtlIkJRY7guW64fADb9m6Ezc6jwGSUpab1IU0rWS7Y=",
+  "Source": "Umniah.Backend",
+  "BasePath": "_content/Umniah.Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

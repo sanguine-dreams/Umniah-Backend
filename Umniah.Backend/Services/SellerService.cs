@@ -9,17 +9,18 @@ namespace Umniah.Backend.Services;
 
 public class SellerService(IBulkRepository<Seller> _sellerRepository, IMapper _mapper) : IBulkCrudService<InputSeller, OutputSeller>
 {
-    public async Task<ServiceResponse<bool>> EditAll(List<OutputSeller> input)
+    public async Task<ServiceResponse<bool>> EditAll(List<InputSeller> input)
     {
         var sellers = _mapper.Map<List<Seller>>(input);
         await _sellerRepository.EditAll(sellers); 
          return new ServiceResponse<bool>(true, "Sellers updated successfully");
     }
 
-    public async Task<ServiceResponse<List<InputSeller>>> GetAll()
+    public async Task<ServiceResponse<List<OutputSeller>>> GetAll()
     {
         var sellers = await _sellerRepository.GetAll();
-        var output = _mapper.Map<List<InputSeller>>(sellers);   
-        return new ServiceResponse<List<InputSeller>>(true, "Sellers retrieved successfully", output);
+        var output = _mapper.Map<List<OutputSeller>>(sellers);   
+        return new ServiceResponse<List<OutputSeller>>(true, "Sellers retrieved successfully", output);
     }
+
 }
