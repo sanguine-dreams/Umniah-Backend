@@ -4,8 +4,9 @@ namespace Umniah.Backend.Data;
 
 public class Product : BaseModel
 {
+    public Seller? Source { get; set; }
     public ProductType ProductType { get; set; }
-    public GiftCategory? GiftCategory { get; set; }
+    // public GiftCategory? GiftCategory { get; set; }
     public string Name { get; set; }
     public int Quantity { get; set; }
     public decimal UnitCost  { get; set; }

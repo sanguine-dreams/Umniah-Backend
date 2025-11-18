@@ -16,6 +16,7 @@ public class Repository<TEntity> : ICrudRepository<TEntity>, IBulkRepository<TEn
         _context = context;
         _set = context.Set<TEntity>();
     }
+
     public virtual async Task<TEntity?> GetByIdAsync(Guid id)
         => await _set.FindAsync(id);
 
@@ -55,5 +56,11 @@ public class Repository<TEntity> : ICrudRepository<TEntity>, IBulkRepository<TEn
     public async Task<List<TEntity>> GetAll()
     {
         return await _set.ToListAsync();
+    }
+
+    public Task<TEntity> GetByName(string name)
+    {
+        var result = _set.AsQueryable().Where(e => EF.Property<string>(e, "Name") == name).FirstOrDefaultAsync();
+        return result;
     }
 }
