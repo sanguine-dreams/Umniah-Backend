@@ -57,10 +57,10 @@ public class Repository<TEntity> : ICrudRepository<TEntity>, IBulkRepository<TEn
     {
         return await _set.ToListAsync();
     }
-
-    public Task<TEntity> GetByName(string name)
+    public async Task<TEntity?> GetByNameAsync(string name)
     {
-        var result = _set.AsQueryable().Where(e => EF.Property<string>(e, "Name") == name).FirstOrDefaultAsync();
-        return result;
+        return await _set
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => EF.Property<string>(e, "Name") == name);
     }
 }

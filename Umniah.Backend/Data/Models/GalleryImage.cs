@@ -5,7 +5,7 @@ namespace Umniah.Backend.Data;
 
 public class GalleryImage : BaseModel
 {
-    public string ImageFile { get; set; }
-    public string Caption { get; set; } 
-    public List<ImageTags> Tags { get; set; }
+    public required string ImageFile { get; set; }
+    public string? Caption { get; set; } 
+    public List<ImageTags>? Tags { get; set; }
 }

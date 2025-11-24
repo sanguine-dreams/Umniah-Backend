@@ -15,7 +15,7 @@ public class MapsterConfigurations
         TypeAdapterConfig<InputGalleryImage, GalleryImage>
             .NewConfig()
             .Map(dest => dest.ImageFile, 
-                src => $"/uploads/{Guid.NewGuid()}{Path.GetExtension(src.imageFile)}")
+                src => $"/uploads/{Guid.NewGuid()}{Path.GetExtension(src.ImageFile)}")
             .AfterMapping((src, dest) => dest.CreatedOn = DateTime.UtcNow);
     }
 }

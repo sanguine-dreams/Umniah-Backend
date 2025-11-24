@@ -70,7 +70,7 @@ public class ProductService(ICrudRepository<Product> _productRepository, IMapper
 
     public async Task<ServiceResponse<OutputProduct>> GetByName(string name)
     {
-        var existingProduct = await _productRepository.GetByName(name);
+        var existingProduct = await _productRepository.GetByNameAsync(name);
         if (existingProduct == null)
             return new ServiceResponse<OutputProduct>(false, "Product not found");
             var output =_mapper.Map<OutputProduct>(existingProduct);

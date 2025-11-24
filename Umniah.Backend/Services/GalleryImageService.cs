@@ -19,7 +19,7 @@ public class GalleryImageService (ICrudRepository<GalleryImage> _galleryReposito
         // Validate image size (5MB max)
         try
         {
-            var imageData = Convert.FromBase64String(input.imageFile);
+            var imageData = Convert.FromBase64String(input.ImageFile);
             if (imageData.Length > 5 * 1024 * 1024)
                 return new ServiceResponse<bool>(false, "Image size cannot exceed 5MB");
         }

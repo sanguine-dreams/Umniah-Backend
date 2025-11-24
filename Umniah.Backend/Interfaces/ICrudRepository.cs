@@ -10,5 +10,5 @@ public interface ICrudRepository<TEntity> where TEntity : BaseModel
     Task<TEntity> CreateAsync(TEntity entity);
     Task<bool> UpdateAsync(TEntity entity);
     Task<bool> DeleteAsync(Guid id);
-    Task<TEntity> GetByName(string name);
+    Task<TEntity?> GetByNameAsync(string name);
 }

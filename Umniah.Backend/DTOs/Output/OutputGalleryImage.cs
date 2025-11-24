@@ -4,7 +4,7 @@ namespace Umniah.Backend.DTOs.Output;
 
 public class OutputGalleryImage
 {
-    public string ImageFile { get; set; }
-    public string Caption { get; set; } 
-    public List<ImageTags> Tags { get; set; }
+    public required string ImageFile { get; set; }
+    public string? Caption { get; set; } 
+    public List<ImageTags>? Tags { get; set; }
 }

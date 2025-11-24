@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Umniah.Backend.Data.Context;
@@ -11,9 +12,11 @@ using Umniah.Backend.Data.Context;
 namespace Umniah.Backend.Migrations
 {
     [DbContext(typeof(UmniahDbContext))]
-    partial class UmniahDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251124104930_AddNewRelations")]
+    partial class AddNewRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,21 +231,17 @@ namespace Umniah.Backend.Migrations
 
             modelBuilder.Entity("Umniah.Backend.Data.Product", b =>
                 {
-                    b.HasOne("Umniah.Backend.Data.Purchase", "Purchase")
+                    b.HasOne("Umniah.Backend.Data.Purchase", null)
                         .WithMany("Product")
                         .HasForeignKey("PurchaseId");
 
-                    b.HasOne("Umniah.Backend.Data.Sale", "Sale")
+                    b.HasOne("Umniah.Backend.Data.Sale", null)
                         .WithMany("Products")
                         .HasForeignKey("SaleId");
 
                     b.HasOne("Umniah.Backend.Data.Seller", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId");
-
-                    b.Navigation("Purchase");
-
-                    b.Navigation("Sale");
 
                     b.Navigation("Seller");
                 });

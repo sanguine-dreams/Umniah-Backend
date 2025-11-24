@@ -9,10 +9,13 @@ using Umniah.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddHttpsRedirection
+(options => {    
+    options.HttpsPort = 5043; });
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddMapster();
 
 builder.Services.AddDbContext<UmniahDbContext>(
