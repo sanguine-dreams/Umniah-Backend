@@ -1,8 +1,10 @@
+using System.Security.Cryptography;
+
 namespace Umniah.Backend.Data;
 
 public class Purchase : BaseModel
 {
-    public required string InvoiceNumber { get; set; }
+    public required string InvoiceNumber { get; set; }      
     public required Seller Seller { get; set; }
     public Guid SellerId { get; set; }
     public required List<Product> Product { get; set; }

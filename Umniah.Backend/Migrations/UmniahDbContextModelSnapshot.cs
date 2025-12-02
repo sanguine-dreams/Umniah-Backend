@@ -220,7 +220,7 @@ namespace Umniah.Backend.Migrations
                     b.HasOne("Umniah.Backend.Data.Sale", "Sale")
                         .WithMany()
                         .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Sale");
@@ -230,15 +230,18 @@ namespace Umniah.Backend.Migrations
                 {
                     b.HasOne("Umniah.Backend.Data.Purchase", "Purchase")
                         .WithMany("Product")
-                        .HasForeignKey("PurchaseId");
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Umniah.Backend.Data.Sale", "Sale")
                         .WithMany("Products")
-                        .HasForeignKey("SaleId");
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Umniah.Backend.Data.Seller", "Seller")
                         .WithMany()
-                        .HasForeignKey("SellerId");
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Purchase");
 
@@ -252,7 +255,7 @@ namespace Umniah.Backend.Migrations
                     b.HasOne("Umniah.Backend.Data.Seller", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Seller");

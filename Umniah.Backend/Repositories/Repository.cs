@@ -44,7 +44,7 @@ public class Repository<TEntity> : ICrudRepository<TEntity>, IBulkRepository<TEn
 
         _set.Remove(entity);
         var result = await _context.SaveChangesAsync();
-        return result > 0;
+        return true;
     }
 
       public async Task EditAll(List<TEntity> input)
