@@ -19,7 +19,7 @@ public class UmniahDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Prevent cascade deletes globally: set Restrict for all foreign keys
+        // Prevent cascade deletes globally
         foreach (var fk in modelBuilder.Model.GetEntityTypes().SelectMany(t => t.GetForeignKeys()))
         {
             fk.DeleteBehavior = DeleteBehavior.Restrict;
@@ -27,7 +27,7 @@ public class UmniahDbContext : DbContext
 
         modelBuilder.Entity<Product>()
         .HasOne(p => p.Purchase)
-        .WithMany(pu => pu.Product)     // adjust if property name differs
+        .WithMany(pu => pu.Product)    
         .HasForeignKey(p => p.PurchaseId)
         .OnDelete(DeleteBehavior.SetNull);
     }

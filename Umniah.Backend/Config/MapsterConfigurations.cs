@@ -11,7 +11,7 @@ public class MapsterConfigurations
         TypeAdapterConfig.GlobalSettings.Default
             .NameMatchingStrategy(NameMatchingStrategy.IgnoreCase);
 
-        // Complex mapping example
+
         TypeAdapterConfig<InputGalleryImage, GalleryImage>
             .NewConfig()
             .Map(dest => dest.ImageFile, 
